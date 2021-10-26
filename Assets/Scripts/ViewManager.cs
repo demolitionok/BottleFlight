@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class ViewManager : MonoBehaviour
+public class ViewManager : IViewManager
 {
-    [SerializeField]
-    private View _startingView;
-    [SerializeField]
-    private View[] _views;
-    
+    private readonly View _startingView;
+    private readonly View[] _views;
     private Stack<View> _history;
     private View _currentView;
-    
+
+    public ViewManager(View startingView, View[] views)
+    {
+        _startingView = startingView;
+        _views = views;
+    }
+
     private T GetView<T>() where T : View
     {
         foreach (var view in _views)
@@ -42,7 +45,7 @@ public class ViewManager : MonoBehaviour
             viewToShow.Show();
     }
 
-    public void ShowView<T>(bool remember = true) where T : View => ShowView(GetView<T>());
+    public void ShowView<T>(bool remember = true) where T : View => ShowView(GetView<T>(), remember);
 
     private void Start()
     {
