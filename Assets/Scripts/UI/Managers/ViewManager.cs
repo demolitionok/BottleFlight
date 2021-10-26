@@ -6,15 +6,18 @@ using UnityEngine;
 
 public class ViewManager : IViewManager
 {
-    private readonly View _startingView;
     private readonly View[] _views;
-    private Stack<View> _history;
+    private readonly Stack<View> _history;
     private View _currentView;
 
     public ViewManager(View startingView, View[] views)
     {
-        _startingView = startingView;
         _views = views;
+
+        _history = new Stack<View>();
+        foreach (var view in _views)
+            view.Init();
+        ShowView(startingView);
     }
 
     private T GetView<T>() where T : View
@@ -47,10 +50,5 @@ public class ViewManager : IViewManager
 
     public void ShowView<T>(bool remember = true) where T : View => ShowView(GetView<T>(), remember);
 
-    private void Start()
-    {
-        foreach (var view in _views)
-            view.Init();
-        ShowView(_startingView);
-    }
+    public void ShowLast() => ShowView(_history.Pop(),false);
 }
