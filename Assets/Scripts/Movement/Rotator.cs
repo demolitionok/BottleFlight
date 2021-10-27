@@ -6,16 +6,32 @@ using UnityEngine.InputSystem;
 
 public class Rotator : MonoBehaviour
 {
+    [SerializeField]
+    private float rotationSpeed = 1f;
+    
     private Vector3 _vectorToRotate = Vector3.zero;
+    private Rigidbody _rb;
+
     public void OnJoystick(InputAction.CallbackContext ctx)
     {
         Vector2 val = ctx.ReadValue<Vector2>();
-        Vector3 rotateVector = new Vector3(val.y, val.x, 0).normalized; 
+        Vector3 rotateVector = new Vector3(val.x, val.y, 0).normalized;
         _vectorToRotate = (Vector3.forward + rotateVector).normalized;
+        
+        if(_vectorToRotate != Vector3.forward)
+            RotateToDirection(_vectorToRotate);
     }
 
-    public void FixedUpdate()
+    private void Awake()
     {
-        gameObject.transform.Rotate(_vectorToRotate);
+        _rb = GetComponent<Rigidbody>();
+    }
+    
+    private void RotateToDirection(Vector3 vectorToRotate)
+    {
+        var towardRotation = Vector3.RotateTowards(transform.forward, vectorToRotate, rotationSpeed, 0f);
+        var resultRotation = Quaternion.LookRotation(towardRotation);
+        
+        _rb.MoveRotation(resultRotation);
     }
 }
