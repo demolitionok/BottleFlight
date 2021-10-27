@@ -16,10 +16,8 @@ public class Rotator : MonoBehaviour
     {
         Vector2 val = ctx.ReadValue<Vector2>();
         Vector3 rotateVector = new Vector3(val.x, val.y, 0).normalized;
-        _vectorToRotate = (Vector3.forward + rotateVector).normalized;
         
-        if(_vectorToRotate != Vector3.forward)
-            RotateToDirection(_vectorToRotate);
+        _vectorToRotate = (Vector3.forward + rotateVector).normalized;
     }
 
     private void Awake()
@@ -33,5 +31,11 @@ public class Rotator : MonoBehaviour
         var resultRotation = Quaternion.LookRotation(towardRotation);
         
         _rb.MoveRotation(resultRotation);
+    }
+
+    private void FixedUpdate()
+    {
+        if(_vectorToRotate != Vector3.forward)
+            RotateToDirection(_vectorToRotate);
     }
 }
