@@ -16,12 +16,12 @@ public class PhysicMovement : MonoBehaviour
     
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        _direction = Vector3.forward;
+        _rigidbody = GetComponent<Rigidbody>(); 
     }
 
     private void FixedUpdate()
     {
+        _direction = forcePoint.transform.forward;
         _rigidbody.AddForceAtPosition(_direction * forceModifier, forcePoint.position, ForceMode.Force);
     }
 }

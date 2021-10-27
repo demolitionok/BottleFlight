@@ -1,0 +1,33 @@
+{
+    "name": "BottleControls",
+    "maps": [
+        {
+            "name": "Mobile",
+            "id": "94007c90-b6f7-42c5-a6c9-7595cc5cbb3f",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Value",
+                    "id": "871fb6b0-7cbf-4f6a-a9e0-2cc9043bbf74",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f752b6ad-15f6-4beb-bba6-72366a0a8f34",
+                    "path": "<AndroidJoystick>/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
