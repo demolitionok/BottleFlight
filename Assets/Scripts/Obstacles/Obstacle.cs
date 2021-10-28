@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 public class Obstacle : MonoBehaviour
 {
-    private UnityEvent<ObstacleInteractor, Obstacle> OnObstacleCollision;
+    [SerializeField]
+    protected UnityEvent<ObstacleInteractor, Obstacle> OnObstacleCollision;
     
     private void OnCollisionEnter(Collision other)
     {
