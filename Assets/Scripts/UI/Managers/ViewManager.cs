@@ -13,10 +13,14 @@ public class ViewManager : IViewManager
     public ViewManager(View startingView, View[] views)
     {
         _views = views;
-
         _history = new Stack<View>();
+
         foreach (var view in _views)
+        {
             view.Init();
+            view.Hide();
+        }
+
         ShowView(startingView);
     }
 
